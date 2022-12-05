@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smhrd.mapper.MessageMapper">
+	<insert id="insertMessage" parameterType="MessageDTO">
+		insert into web_message values
+		(num_message.nextval, #{sender}, #{recipient}, #{message}, sysdate)
+	</insert>
+<!-- 	<resultMap type="MessageDTO" id="show">
+		<result column="num" property="num" jdbcType="INTEGER" javaType="int"/>
+		<result column="sender" property="sender" jdbcType="VARCHAR" javaType="String"/>
+		<result column="recipient" property="recipient" jdbcType="VARCHAR" javaType="String"/>
+		<result column="message" property="message" jdbcType="VARCHAR" javaType="String"/>
+		<result column="m_date" property="m_date" jdbcType="TIMESTAMP" javaType="String"/>
+	</resultMap>
+	 -->
+	<select id="showMessage" parameterType="String" resultType="MessageDTO">
+		select * from web_message where recipient = #{email}
+	</select>
+	
+	<delete id="deleteMessage" parameterType="String">
+		delete from web_message where recipient = #{email}
+	</delete>
+	
+	<delete id="deleteOne" parameterType="int">
+		delete from web_message where num=#{num}
+	</delete>
+	
+</mapper>
+
+
+
+
+
